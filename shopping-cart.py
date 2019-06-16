@@ -26,34 +26,45 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 #Defining variables & contants 
-product_ids= list ( range(1, ( len(products ) +1 ) ))
-print(product_ids)
+product_ids= list ( range( 1, len(products ) +1 ) )
+strproduct_ids= [ str(item) for item in product_ids ]
 sub_total= 0 
 selected_ids= [ ]
 selected_id = 0
+TAX_RATE = 0.0875 # Washington, NYC sales tax rate (constant)
 # User defined functions ( To add a $ sign to the price )
 
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
 
-#  Capturing input
+
+#  Capturing valid inputs / End of process / Handling all invalid inputs 
+
 
 while True : 
-
      selected_id = input("Please input the product ID")
-    
+
      if selected_id == "DONE" : break 
-     elif int(selected_id) not in product_ids : print (" Invalid, try again") 
+     elif selected_id not in strproduct_ids : print (" Invalid id, try again") 
      else  : selected_ids.append(selected_id)
 
+### output 
 
+print("---------------------------------")
+print(" Daily-Fresh Grocery")
+print("WWW.Fresh-Grocery.com")
+print("---------------------------------")
+print("SELECTED PRODUCTS:")
+print("---------------------------------")
 
 for selected_id in selected_ids:
       matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
       matching_product = matching_products[0]
       sub_total = sub_total + matching_product["price"]
-      print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")     
- 
+      print(" .... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
-
-
+print("....Sub_total  = " + str(to_usd(sub_total)) )
+print("....Sales tax  = " + str(to_usd(sub_total*TAX_RATE)))
+print("....Total      = " + str(to_usd(sub_total*(1+TAX_RATE))))
+print("---------------------------------")
+print(" Thank you forshopping with us, see you again")
