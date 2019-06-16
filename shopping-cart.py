@@ -1,6 +1,8 @@
 # shopping_cart.py
 
-
+#Date & time librarry importing 
+import datetime as dt
+# The list of products in the inventory
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -23,27 +25,34 @@ products = [
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
-Total_Price= 0 
+#Defining variables & contants 
+product_ids= list ( range(1, ( len(products ) +1 ) ))
+print(product_ids)
+sub_total= 0 
+selected_ids= [ ]
+selected_id = 0
+# User defined functions ( To add a $ sign to the price )
+
+def to_usd(my_price):
+    return "${0:,.2f}".format(my_price)
+
 #  Capturing input
+
 while True : 
 
      selected_id = input("Please input the product ID")
-     if selected_id == "DONE": 
-         break
-  
-     else : 
-      Matching_Products= [ p for p in products if str(p["id"]) == str(selected_id) ] 
-      Matching_Product= Matching_Products[0]
-      Total_Price= Total_Price + Matching_Product["price"]
-      print( " Selected product   : " + Matching_Product["name"] + "....."+ str(Matching_Product["price"]) ) 
-
-
-#Total Price 
-print("Total_Price =  " + str(Total_Price))
-
-
     
-     
+     if selected_id == "DONE" : break 
+     elif int(selected_id) not in product_ids : print (" Invalid, try again") 
+     else  : selected_ids.append(selected_id)
+
+
+
+for selected_id in selected_ids:
+      matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+      matching_product = matching_products[0]
+      sub_total = sub_total + matching_product["price"]
+      print(" ... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")     
  
 
 
