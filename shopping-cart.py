@@ -26,8 +26,8 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 #Defining variables & contants 
-product_ids= list ( range( 1, len(products ) +1 ) )
-strproduct_ids= [ str(item) for item in product_ids ]
+product_ids= list ( range( 1, len(products ) +1 ) ) 
+strproduct_ids= [ str(item) for item in product_ids ] # str list with all the ids
 sub_total= 0 
 selected_ids= [ ]
 selected_id = 0
@@ -40,7 +40,7 @@ def to_usd(my_price):
 
 #  Capturing valid inputs / End of process / Handling all invalid inputs 
 
-
+checkout_start_at = dt.datetime.now() 
 while True : 
      selected_id = input("Please input the product ID")
 
@@ -49,10 +49,11 @@ while True :
      else  : selected_ids.append(selected_id)
 
 ### output 
-
 print("---------------------------------")
 print(" Daily-Fresh Grocery")
 print("WWW.Fresh-Grocery.com")
+print("---------------------------------")
+print("CHECKOUT AT: " + checkout_start_at.strftime("%Y-%m-%d %I:%M %p"))
 print("---------------------------------")
 print("SELECTED PRODUCTS:")
 print("---------------------------------")
@@ -63,8 +64,9 @@ for selected_id in selected_ids:
       sub_total = sub_total + matching_product["price"]
       print(" .... " + matching_product["name"] + " (" + to_usd(matching_product["price"]) + ")")
 
-print("....Sub_total  = " + str(to_usd(sub_total)) )
-print("....Sales tax  = " + str(to_usd(sub_total*TAX_RATE)))
-print("....Total      = " + str(to_usd(sub_total*(1+TAX_RATE))))
+print(" ....Sub_total  = " + str(to_usd(sub_total)) )
+print(" ....Sales tax  = " + str(to_usd(sub_total*TAX_RATE)))
+print(" ....Total      = " + str(to_usd(sub_total*(1+TAX_RATE))))
 print("---------------------------------")
 print(" Thank you forshopping with us, see you again")
+print("---------------------------------")
