@@ -23,12 +23,28 @@ products = [
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
-
+Total_Price= 0 
 #  Capturing input
+while True : 
 
-selected_id = input("Please input the product ID")
-Matching_Products= [ p for p in products if str(p["id"]) == str(selected_id) ] 
-Matching_Product= Matching_Products[0]
-print( " Selected product   : " + Matching_Product["name"] + "....."+ str(Matching_Product["price"]) ) 
+     selected_id = input("Please input the product ID")
+     if selected_id == "DONE": 
+         break
+  
+     else : 
+      Matching_Products= [ p for p in products if str(p["id"]) == str(selected_id) ] 
+      Matching_Product= Matching_Products[0]
+      Total_Price= Total_Price + Matching_Product["price"]
+      print( " Selected product   : " + Matching_Product["name"] + "....."+ str(Matching_Product["price"]) ) 
+
+
+#Total Price 
+print("Total_Price =  " + str(Total_Price))
+
+
+    
+     
+ 
+
 
 
